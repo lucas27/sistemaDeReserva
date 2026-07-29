@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS localizacao(
+    id BIGSERIAL PRIMARY KEY,
+    endereco VARCHAR(255),
+    andar VARCHAR(50),
+    descricao VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
