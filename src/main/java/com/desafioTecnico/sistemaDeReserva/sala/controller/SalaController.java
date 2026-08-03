@@ -4,18 +4,21 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.desafioTecnico.sistemaDeReserva.sala.documentation.SalaControllerDoc;
 import com.desafioTecnico.sistemaDeReserva.sala.dto.request.SalaRequestDto;
-import com.desafioTecnico.sistemaDeReserva.sala.dto.request.SalasConsultaDto;
+import com.desafioTecnico.sistemaDeReserva.sala.dto.request.SalasConsultaRequestDto;
+import com.desafioTecnico.sistemaDeReserva.sala.dto.response.SalaConsultaResponseDto;
 import com.desafioTecnico.sistemaDeReserva.sala.dto.response.SalaResponseDto;
 import com.desafioTecnico.sistemaDeReserva.sala.service.SalaService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
-@RestController("/sala")
+@RestController
+@RequestMapping("/sala")
 @RequiredArgsConstructor
 public class SalaController implements SalaControllerDoc {
 
@@ -29,8 +32,8 @@ public class SalaController implements SalaControllerDoc {
     }
 
     @Override
-    public ResponseEntity<List<SalaResponseDto>> consultarSalas(@Valid SalasConsultaDto dto) {
-       List<SalaResponseDto> resposta = service.consultarSalasLivres(dto);
+    public ResponseEntity<List<SalaConsultaResponseDto>> consultarSalas(@Valid SalasConsultaRequestDto dto) {
+       List<SalaConsultaResponseDto> resposta = service.consultarSalasLivres(dto);
        return ResponseEntity.status(HttpStatus.OK).body(resposta);
     }
     

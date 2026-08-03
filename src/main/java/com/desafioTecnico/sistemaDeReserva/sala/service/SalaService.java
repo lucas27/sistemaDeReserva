@@ -8,10 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.desafioTecnico.sistemaDeReserva.sala.domain.Localizacao;
 import com.desafioTecnico.sistemaDeReserva.sala.domain.Sala;
 import com.desafioTecnico.sistemaDeReserva.sala.dto.request.SalaRequestDto;
-import com.desafioTecnico.sistemaDeReserva.sala.dto.request.SalasConsultaDto;
+import com.desafioTecnico.sistemaDeReserva.sala.dto.request.SalasConsultaRequestDto;
+import com.desafioTecnico.sistemaDeReserva.sala.dto.response.SalaConsultaResponseDto;
 import com.desafioTecnico.sistemaDeReserva.sala.dto.response.SalaResponseDto;
 import com.desafioTecnico.sistemaDeReserva.sala.repository.SalaRepository;
-import com.desafioTecnico.sistemaDeReserva.sala.validator.SalaValidator;
+import com.desafioTecnico.sistemaDeReserva.shared.validator.Validator;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SalaService {
     private final SalaRepository repository;
-    private final SalaValidator validator;
+    private final Validator validator;
     
     @Transactional
     public SalaResponseDto adicionarSala(SalaRequestDto dto) {
@@ -50,8 +51,9 @@ public class SalaService {
         return SalaResponseDto.pegarValorEntidade(response);
     }
 
-    public List<SalaResponseDto> consultarSalasLivres(SalasConsultaDto dto) {
-        List<SalaResponseDto> salasLivre = repository.pegarListaSalasLivres(dto.nome(), dto.endereco());
+    @Transactional(readOnly = true)
+    public List<SalaConsultaResponseDto> consultarSalasLivres(SalasConsultaRequestDto dto) {
+        List<SalaConsultaResponseDto> salasLivre = repository.pegarListaSalasLivres(dto.data());
         return salasLivre;
 
     }

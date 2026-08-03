@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.desafioTecnico.sistemaDeReserva.sala.dto.request.SalasConsultaDto;
+import com.desafioTecnico.sistemaDeReserva.sala.dto.request.SalasConsultaRequestDto;
 import com.desafioTecnico.sistemaDeReserva.sala.dto.request.SalaRequestDto;
+import com.desafioTecnico.sistemaDeReserva.sala.dto.response.SalaConsultaResponseDto;
 import com.desafioTecnico.sistemaDeReserva.sala.dto.response.SalaResponseDto;
 import com.desafioTecnico.sistemaDeReserva.shared.handler.dto.ExceptionMessageDto;
 
@@ -24,7 +25,7 @@ import jakarta.validation.Valid;
 public interface SalaControllerDoc { 
     // ============================================== Adicionar Sala ==============================================================
     @Operation(summary = "adicionar sala", description = "Rota para adicionar os dados da sala ao banco de dados")
-    @ApiResponse(responseCode = "201", description = "Cliente criado com sucesso", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SalaResponseDto.class)))
+    @ApiResponse(responseCode = "201", description = "Sala criada com sucesso", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SalaResponseDto.class)))
     @ApiResponse(responseCode = "409", description = "Sala já existe", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ExceptionMessageDto.class)))
     @ApiResponse(responseCode = "400", description = "Dados de requisição inválidos", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ExceptionMessageDto.class)))
     @ApiResponse(responseCode = "500", description = "Erro interno no servidor", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ExceptionMessageDto.class)))
@@ -35,11 +36,11 @@ public interface SalaControllerDoc {
     
     // ============================================== Consultar Salas ==============================================================
     @Operation(summary = "Buscar salas Livres", description = "Rota para buscar os dados de salas livres no banco de dados")
-    @ApiResponse(responseCode = "200", description = "Cliente criado com sucesso", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SalaResponseDto.class)))
+    @ApiResponse(responseCode = "200", description = "Salas encontradas com sucesso", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SalaConsultaResponseDto.class)))
     @ApiResponse(responseCode = "400", description = "Dados de requisição inválidos", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ExceptionMessageDto.class)))
     @ApiResponse(responseCode = "500", description = "Erro interno no servidor", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ExceptionMessageDto.class)))
     @PostMapping("/consultar/salas")
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<List<SalaResponseDto>> consultarSalas(@RequestBody @Valid SalasConsultaDto dto); 
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<SalaConsultaResponseDto>> consultarSalas(@RequestBody @Valid SalasConsultaRequestDto dto); 
     // =============================================================================================================================
 }
