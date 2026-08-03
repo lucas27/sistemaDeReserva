@@ -4,10 +4,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.desafioTecnico.sistemaDeReserva.cliente.domain.Cliente;
-import com.desafioTecnico.sistemaDeReserva.cliente.dto.ClienteRequestDto;
-import com.desafioTecnico.sistemaDeReserva.cliente.dto.ClienteResponseDto;
+import com.desafioTecnico.sistemaDeReserva.cliente.dto.request.ClienteRequestDto;
+import com.desafioTecnico.sistemaDeReserva.cliente.dto.response.ClienteResponseDto;
 import com.desafioTecnico.sistemaDeReserva.cliente.repository.ClienteRepository;
-import com.desafioTecnico.sistemaDeReserva.cliente.validator.ClienteValidator;
+import com.desafioTecnico.sistemaDeReserva.shared.validator.Validator;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ClienteService {
     private final ClienteRepository repository;
-    private final ClienteValidator validator;
+    private final Validator validator;
 
     @Transactional
     public ClienteResponseDto salvarCliente(ClienteRequestDto dto) {

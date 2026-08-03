@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.desafioTecnico.sistemaDeReserva.cliente.dto.ClienteRequestDto;
-import com.desafioTecnico.sistemaDeReserva.cliente.dto.ClienteResponseDto;
+import com.desafioTecnico.sistemaDeReserva.cliente.dto.request.ClienteRequestDto;
+import com.desafioTecnico.sistemaDeReserva.cliente.dto.response.ClienteResponseDto;
 import com.desafioTecnico.sistemaDeReserva.shared.handler.dto.ExceptionMessageDto;
 
 import io.swagger.v3.oas.annotations.Operation;
