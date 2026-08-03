@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.desafioTecnico.sistemaDeReserva.shared.customExceptions.DuplicateException;
 import com.desafioTecnico.sistemaDeReserva.shared.handler.dto.ExceptionMessageDto;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     
@@ -22,6 +24,16 @@ public class GlobalExceptionHandler {
         dto.setMessage(exception.getMessage());
 
         return ResponseEntity.status(HttpStatus.CONFLICT).body(dto);
+    }
+    
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<ExceptionMessageDto> naoFoiEncontrado(EntityNotFoundException exception) {
+        ExceptionMessageDto dto = new ExceptionMessageDto();
+
+        dto.setStatus(HttpStatus.NOT_FOUND.value());
+        dto.setMessage(exception.getMessage());
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(dto);
     }
 
     // status 400 
